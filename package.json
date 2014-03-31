@@ -15,7 +15,8 @@
   "author": "Gaolz",
   "license": "MIT",
   "dependencies": {
-    "connect": "^3.0.0-rc.1"
+    "connect": "^3.0.0-rc.1",
+    "serve-static": "^1.0.3"
   },
   "devDependencies": {
     "minimist": "0.0.8"

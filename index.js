@@ -1,39 +1,19 @@
-(function() {
-  var mini_harp;
-  var connect = require('connect');
-  var app = connect();
-  var body = (new Date()).toISOString();
+var connect = require('connect');
+var serveStatic = require('serve-static');
 
-  module.exports = mini_harp = function(port) {
-    if(port === undefined) {
-      return (function() {
-        console.log("Starting http server on http://localhost:4000");
-        app.use(function(req,res) {
-          if (req.url === '/current-time') {
-	    res.writeHead(200, { 'Content-Type': 'text/plain'});
-            res.end(body + "\n");
-          }
-          else {
-	    res.writeHead(404, { 'Content-Type': 'text/plain'});
-            res.end("Can't Get " + req.url + "\n");
-          }
-	}).listen(4000);
-      }).call(this);
+module.exports = function(dirname) {
+  var app = connect();
+
+  app.use(function(req, res, next) {
+    if (req.url === '/current-time') {
+      res.end((new Date()).toISOString() + "\n");
     }
     else {
-      return (function() {
-        console.log("Starting http server on http://localhost:" + port);
-	app.use(function(req,res) {
-	  if (req.url === '/current-time') {
-	    res.writeHead(200, { 'Content-Type': 'text/plain'});
-	    res.end(body + "\n");
-	  }
-	  else {
-	    res.writeHead(404, { 'Content-Type': 'text/plain'});
-	    res.end("Can't Get " + req.url + "\n");
-	  }
-	}).listen(port);
-      }).call(this);
+      next();
     }
-  }
-}).call(this);
+  });
+
+  app.use(serveStatic(dirname));
+
+  return app;
+}
