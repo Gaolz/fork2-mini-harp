@@ -1,7 +1,7 @@
 var connect = require('connect');
 var serveStatic = require('serve-static');
 
-module.exports = function(dirname) {
+module.exports = function(path) {
   var app = connect();
 
   app.use(function(req, res, next) {
@@ -13,7 +13,7 @@ module.exports = function(dirname) {
     }
   });
 
-  app.use(serveStatic(dirname));
+  app.use(serveStatic(path));
 
   return app;
 }
