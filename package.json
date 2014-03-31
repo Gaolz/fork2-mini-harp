@@ -1,0 +1,20 @@
+{
+  "name": "mini-harp",
+  "version": "0.0.0",
+  "description": "A simple middleware to serve static files",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "bin": {
+    "mini-harp": "./bin/mini-harp.js"
+  },
+  "keywords": [
+    "first-lesson"
+  ],
+  "author": "Gaolz",
+  "license": "MIT",
+  "dependencies": {
+    "connect": "^3.0.0-rc.1"
+  }
+}
