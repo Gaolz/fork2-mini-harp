@@ -2,6 +2,7 @@ module.exports = function(root) {
   var connect = require('connect');
   var serveStatic = require('serve-static');
   var makeJade = require('./lib/processor/jade.js');
+  var makeLess = require('./lib/processor/less.js');
   var path = require('path');
   var app = connect();
 
@@ -13,7 +14,7 @@ module.exports = function(root) {
 	next();
       } else {
           var ext = path.extname(req.url);
-	  if (ext === '.jade') {
+	  if (ext === '.jade' || ext === '.less') {
 	    res.statusCode = 404;
 	    res.end();
           } else next();
@@ -22,6 +23,7 @@ module.exports = function(root) {
 
   app.use(serveStatic(root));
   app.use(makeJade(root));
+  app.use(makeLess(root));
 
   return app;
 }
