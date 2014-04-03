@@ -11,7 +11,7 @@ module.exports = function(root) {
       res.end((new Date()).toISOString() + "\n");
     } else if (req.url === '/') {
         req.url += 'index.html';
-	next();
+				next();
       } else {
           var ext = path.extname(req.url);
 	  if (ext === '.jade' || ext === '.less') {
