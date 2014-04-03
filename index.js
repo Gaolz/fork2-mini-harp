@@ -14,12 +14,12 @@ module.exports = function(root) {
 				next();
       } else {
           var ext = path.extname(req.url);
-	  if (ext === '.jade' || ext === '.less') {
-	    res.statusCode = 404;
-	    res.end();
+	        if (ext === '.jade' || ext === '.less') {
+	          res.writeHead(404, {});
+	          res.end();
           } else next();
-	 }
-  });
+	       }
+   });
 
   app.use(serveStatic(root));
   app.use(makeJade(root));
